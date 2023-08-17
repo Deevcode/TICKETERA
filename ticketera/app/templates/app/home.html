@@ -1,4 +1,4 @@
-{% extends 'app/base.html'  %}
+{% extends 'app/base.html' %}
 
 {% load static %}
 
@@ -6,11 +6,36 @@
 
 {% endblock %}
 
-
 {% block css %}
-
+<style>
+    /* Estilos personalizados */
+    .jumbotron {
+        background-color: #f8f9fa;
+        padding: 2rem 1rem;
+        border-radius: 0.5rem;
+    }
+    .ticketera-heading {
+        font-size: 2.5rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+    }
+    .ticketera-description {
+        font-size: 1.2rem;
+        color: #6c757d;
+    }
+    .ticketera-cta {
+        margin-top: 2rem;
+    }
+</style>
 {% endblock %}
 
 {% block contenido %}
-
+<div class="container mt-5">
+    <div class="jumbotron">
+        <h1 class="ticketera-heading">Bienvenido a la Ticketera de Contact Center</h1>
+        <p class="ticketera-description">Gestiona eficientemente las incidencias y requerimientos de los clientes con nuestra avanzada solución de ticketera.</p>
+        <p class="ticketera-description">Nuestro sistema te permite registrar, gestionar y dar seguimiento a cada ticket de manera organizada y efectiva.</p>
+        <a href="{% url 'registrar_ticket' %}" class="btn btn-primary btn-lg ticketera-cta">Registrar Nuevo Ticket</a>
+    </div>
+</div>
 {% endblock %}

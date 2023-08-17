@@ -12,7 +12,7 @@
         {% load static %}
 
         {% block css %}
-
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
         {% endblock %}
 		<link rel="stylesheet" href="{% static 'app/css/main.css' %}" />
         <link rel="stylesheet" href="{% static 'app/sass/main.scss' %}" />
@@ -51,7 +51,8 @@
 						<ul>
 							<!--
 							<li class="current"><a href="#">{{user.username}}</a></li>-->
-							<li><a href="#">EMITIR TICKET</a></li>
+							<li><a href="{% url 'registrar_ticket'%}">EMITIR TICKET</a></li>
+							<li><a href="{% url 'listar_tickets' %}">LISTAR TICKETS</a></li>
 							<!--
 							{% if user.is_authenticated %}
 							<li><a href="#">Stock Bodega</a></li>
@@ -86,7 +87,7 @@
 						Swal.fire({
 							"title": "Felicitaciones",
 							"text": "{{me}}",
-							"icon": "succes"
+							"icon": "success"
 						})
 					</script>
 				{% endfor %}
@@ -98,6 +99,7 @@
 			<script src="{% static 'app/js/breakpoints.min.js'%}"></script>
 			<script src="{% static 'app/js/util.js'%}"></script>
             <script src="{% static 'app/js/main.js' %}"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
             {% endblock %}
 
 	</body>

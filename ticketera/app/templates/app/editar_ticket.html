@@ -1,0 +1,32 @@
+{% extends 'app/base.html' %}
+
+{% block css %}
+<style>
+    /* Estilos personalizados */
+    .custom-form-label {
+        font-weight: bold;
+    }
+    .custom-form-field {
+        margin-bottom: 15px;
+    }
+    .custom-form-submit {
+        margin-top: 20px;
+    }
+</style>
+{% endblock %}
+
+{% block contenido %}
+<div class="container mt-5">
+    <h1 class="mb-4">Editar Ticket</h1>
+    <form method="post" class="needs-validation" novalidate>
+        {% csrf_token %}
+        {% for field in form %}
+            <div class="mb-3 custom-form-field">
+                <label for="{{ field.id_for_label }}" class="form-label custom-form-label">{{ field.label }}</label>
+                {{ field }}
+            </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-primary custom-form-submit" >Guardar Cambios</button>
+    </form>
+</div>
+{% endblock %}
