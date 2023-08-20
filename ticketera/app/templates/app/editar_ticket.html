@@ -2,6 +2,13 @@
 
 {% block css %}
 <style>
+    .edit-heading {
+        font-size: 2.5rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+    }
+</style>
+<style>
     /* Estilos personalizados */
     .custom-form-label {
         font-weight: bold;
@@ -17,7 +24,7 @@
 
 {% block contenido %}
 <div class="container mt-5">
-    <h1 class="mb-4">Editar Ticket</h1>
+    <h1 class="edit-heading">Editar Ticket</h1>
     <form method="post" class="needs-validation" novalidate>
         {% csrf_token %}
         {% for field in form %}
@@ -26,7 +33,44 @@
                 {{ field }}
             </div>
         {% endfor %}
-        <button type="submit" class="btn btn-primary custom-form-submit" >Guardar Cambios</button>
+        <button type="button" class="btn btn-primary custom-form-submit" id="editarBtn">Guardar Cambios</button>
+        <a href="{% url 'listar_tickets' %}" class="btn btn-secondary custom-form-submit">Cancelar</a>
     </form>
 </div>
+{% endblock %}
+{% block js %}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    // Función para mostrar un SweetAlert2 de confirmación al hacer clic en "Guardar Cambios"
+    document.addEventListener('DOMContentLoaded', () => {
+        const editarBtn = document.getElementById('editarBtn');
+        
+        editarBtn.addEventListener('click', () => {
+            Swal.fire({
+                title: 'Confirmar',
+                text: '¿Desea guardar los cambios en el ticket?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Sí, guardar',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Envía el formulario si el usuario confirma
+                    document.querySelector('form').submit();
+                }
+            });
+        });
+
+        // Función para mostrar un SweetAlert2 después de enviar el formulario
+        {% if success_message %}
+        Swal.fire({
+            title: 'Éxito',
+            text: '{{ success_message }}',
+            icon: 'success',
+            timer: 3000,  // Auto-cerrar después de 3 segundos
+            showConfirmButton: false
+        });
+        {% endif %}
+    });
+</script>
 {% endblock %}

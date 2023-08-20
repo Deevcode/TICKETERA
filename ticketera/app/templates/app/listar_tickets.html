@@ -8,6 +8,13 @@
 
 {% block css %}
 <style>
+    .edit-heading {
+        font-size: 2.5rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+    }
+</style>
+<style>
     /* Estilos personalizados */
     .no-tickets-message {
         text-align: center;
@@ -20,7 +27,7 @@
 
 {% block contenido %}
 <div class="container mt-5">
-    <h1 class="mb-4">Listado de Tickets Emitidos</h1>
+    <h1 class="edit-heading">Listado de Tickets Emitidos</h1>
     {% if tickets %}
     <div class="table-responsive">
         <table class="table table-bordered table-hover">
@@ -46,16 +53,16 @@
                 {% for ticket in tickets %}
                 <tr>
                     <td>{{ ticket.IdTicket }}</td>
-                    <td>{{ ticket.Sede }}</td>
+                    <td>{{ ticket.get_Sede_display }}</td>
                     <td>{{ ticket.Direccion }}</td>
                     <td>{{ ticket.Area }}</td>
-                    <td>{{ ticket.Modalidad }}</td>
+                    <td>{{ ticket.get_Modalidad_display }}</td>
                     <td>{{ ticket.Nombre }}</td>
                     <td>{{ ticket.Rut }}</td>
                     <td>{{ ticket.Usuario }}</td>
                     <td>{{ ticket.CorreoInstitucional }}</td>
                     <td>{{ ticket.Telefono }}</td>
-                    <td>{{ ticket.TipoReporte }}</td>
+                    <td>{{ ticket.get_TipoReporte_display }}</td>
                     <td>{{ ticket.Solicitud }}</td>
                     <td>{{ ticket.FechaEmision }}</td>
                     <td>
