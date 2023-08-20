@@ -22,6 +22,36 @@
         font-size: 1.2rem;
         color: #6c757d;
     }
+
+    .table-container {
+        overflow-x: auto;
+        max-width: 100%;
+    }
+
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .table th,
+    .table td {
+        padding: 10px 15px;
+        vertical-align: middle;
+    }
+
+    .table thead th {
+        background-color: #343a40;
+        color: white;
+    }
+
+    .table tbody tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    .btn-edit {
+        padding: 5px 10px;
+        font-size: 14px;
+    }
 </style>
 {% endblock %}
 
@@ -29,7 +59,7 @@
 <div class="container mt-5">
     <h1 class="edit-heading">Listado de Tickets Emitidos</h1>
     {% if tickets %}
-    <div class="table-responsive">
+    <div class="table-container">
         <table class="table table-bordered table-hover">
             <thead class="table-dark">
                 <tr>
@@ -44,6 +74,9 @@
                     <th>Correo Institucional</th>
                     <th>Teléfono</th>
                     <th>Tipo de Reporte</th>
+                    <th>IP</th>
+                    <th>Hostname</th>
+                    <th>Marca/Modelo</th>
                     <th>Solicitud</th>
                     <th>Fecha de Emisión</th>
                     <th>Editar</th>
@@ -63,10 +96,13 @@
                     <td>{{ ticket.CorreoInstitucional }}</td>
                     <td>{{ ticket.Telefono }}</td>
                     <td>{{ ticket.get_TipoReporte_display }}</td>
+                    <td>{{ ticket.IP }}</td>
+                    <td>{{ ticket.HOSTNAME }}</td>
+                    <td>{{ ticket.MARCA_MODELO }}</td>
                     <td>{{ ticket.Solicitud }}</td>
                     <td>{{ ticket.FechaEmision }}</td>
                     <td>
-                        <a href="{% url 'editar_ticket' ticket.IdTicket %}" class="btn btn-primary btn-sm">Editar</a>
+                        <a href="{% url 'editar_ticket' ticket.IdTicket %}" class="btn btn-primary btn-sm btn-edit">Editar</a>
                     </td>
                 </tr>
                 {% endfor %}

@@ -15,6 +15,9 @@ class Ticket(models.Model):
     FechaEmision = models.DateTimeField(auto_now_add=True)
     TipoReporte = models.IntegerField(choices=REPORTE_CHOICES, null=True)
     Solicitud = models.CharField(max_length=600, default='')
-
+    IP = models.CharField(max_length=200, blank=True, null=True)
+    HOSTNAME = models.CharField(max_length=200, blank=True, null=True)
+    MARCA_MODELO = models.CharField(max_length=200, blank=True, null=True)
+    
     def __str__(self):
         return f"{self.IdTicket} ; {self.Usuario} ; {self.FechaEmision}"
