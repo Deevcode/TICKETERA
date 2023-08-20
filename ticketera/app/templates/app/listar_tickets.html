@@ -52,6 +52,10 @@
         padding: 5px 10px;
         font-size: 14px;
     }
+
+    .bold-text {
+        font-weight: bold;
+    }
 </style>
 {% endblock %}
 
@@ -70,7 +74,7 @@
                     <th>Modalidad</th>
                     <th>Nombre</th>
                     <th>RUT</th>
-                    <th>Usuario</th>
+                    <th class="bold-text">Usuario</th>
                     <th>Correo Institucional</th>
                     <th>Teléfono</th>
                     <th>Tipo de Reporte</th>
@@ -92,7 +96,7 @@
                     <td>{{ ticket.get_Modalidad_display }}</td>
                     <td>{{ ticket.Nombre }}</td>
                     <td>{{ ticket.Rut }}</td>
-                    <td>{{ ticket.Usuario }}</td>
+                    <td class="bold-text" >{{ ticket.Usuario }}</td>
                     <td>{{ ticket.CorreoInstitucional }}</td>
                     <td>{{ ticket.Telefono }}</td>
                     <td>{{ ticket.get_TipoReporte_display }}</td>
