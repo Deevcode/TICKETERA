@@ -62,6 +62,11 @@
 {% block contenido %}
 <div class="container mt-5">
     <h1 class="edit-heading">Listado de Tickets Emitidos</h1>
+    <form class="search-form" method="get">
+        <label for="search_usuario">Filtrar por Usuarios:</label>
+        <input type="text" id="search_usuario" name="search_usuario" value="{{ request.GET.search_usuario }}">
+        <button type="submit">Buscar</button>
+    </form>
     {% if tickets %}
     <div class="table-container">
         <table class="table table-bordered table-hover">
@@ -106,7 +111,7 @@
                     <td>{{ ticket.Solicitud }}</td>
                     <td>{{ ticket.FechaEmision }}</td>
                     <td>
-                        <a href="{% url 'editar_ticket' ticket.IdTicket %}" class="btn btn-primary btn-sm btn-edit">Editar</a>
+                        <a href="{% url 'editar_ticket' ticket.IdTicket %}" class="btn btn-link btn-sm btn-edit">Editar</a>
                     </td>
                 </tr>
                 {% endfor %}

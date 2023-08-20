@@ -32,7 +32,13 @@ def registrar_ticket(request):
     return render(request, 'app/registrar_ticket.html', {'form': form})
 
 def listar_tickets(request):
-    tickets = Ticket.objects.all()
+    search_usuario = request.GET.get('search_usuario', '')
+    
+    if search_usuario:
+        tickets = Ticket.objects.filter(Usuario__icontains=search_usuario)
+    else:
+        tickets = Ticket.objects.all()
+    
     return render(request, 'app/listar_tickets.html', {'tickets': tickets})
 
 def exito(request):
