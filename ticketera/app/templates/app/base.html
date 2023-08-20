@@ -1,101 +1,89 @@
 <!DOCTYPE HTML>
 <html>
-	<head>
-		<title>TICKETERA</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-        {% load static %}
-
-        {% block css %}
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<head>
+    <title>TICKETERA</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    {% load static %}
+    <style>
+    </style>
+    {% block css %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    {% endblock %}
+    <link rel="stylesheet" href="{% static 'app/css/main.css' %}" />
+    <link rel="stylesheet" href="{% static 'app/sass/main.scss' %}" />
+    <link rel="stylesheet" href="{% static 'app/sass/libs/_breakpoints.scss' %}" />
+    <link rel="stylesheet" href="{% static 'app/sass/libs/_functions.scss' %}" />
+    <link rel="stylesheet" href="{% static 'app/sass/libs/_html-grid.scss' %}" />
+    <link rel="stylesheet" href="{% static 'app/sass/libs/_mixins.scss' %}" />
+    <link rel="stylesheet" href="{% static 'app/sass/libs/_vars.scss' %}" />
+    <link rel="stylesheet" href="{% static 'app/sass/libs/_vendor.scss' %}" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_MAPS_API_KEY }}&callback=initMap" async defer></script>
+</head>
+<body class="is-preload">
+	
+    <!-- Content -->
+    <div id="content">
+        {% block contenido  %}
+        {% if messages %}
+        {% for me in messages %}
+        {{ me }}
+        {% endfor %}
+        {% endif %}
         {% endblock %}
-		<link rel="stylesheet" href="{% static 'app/css/main.css' %}" />
-        <link rel="stylesheet" href="{% static 'app/sass/main.scss' %}" />
-        <link rel="stylesheet" href="{% static 'app/sass/libs/_breakpoints.scss' %}" />
-        <link rel="stylesheet" href="{% static 'app/sass/libs/_functions.scss' %}" />
-        <link rel="stylesheet" href="{% static 'app/sass/libs/_html-grid.scss' %}" />
-        <link rel="stylesheet" href="{% static 'app/sass/libs/_mixins.scss' %}" />
-        <link rel="stylesheet" href="{% static 'app/sass/libs/_vars.scss' %}" />
-        <link rel="stylesheet" href="{% static 'app/sass/libs/_vendor.scss' %}" />
-        
-	</head>
-	<body class="is-preload">
+    </div>
+    <!-- Sidebar (Hamburguesa) -->
+    <div id="sidebar">
+        <h1 id="logo"><a href="{% url 'home'%}">TICKETERA</a></h1>
+        <div class="menu-container" id="menuContainer">
+            <nav id="nav">
+                <ul>
+                    <li><a href="{% url 'registrar_ticket'%}">EMITIR TICKET</a></li>
+                    <li><a href="{% url 'listar_tickets' %}">LISTAR TICKETS</a></li>
+                </ul>
+            </nav>
+            <ul id="copyright">
+                <li>&copy; TICKETERA.</li><li>Diseñado por: <a href="https://github.com/Deevcode">Deevcode</a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    {% if messages %}
+    {% for me in messages %}
+    <script>
+        Swal.fire({
+            "title": "Felicitaciones",
+            "text": "{{me}}",
+            "icon": "success"
+        });
+    </script>
+    {% endfor %}
+    {% endif %}
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuBtn = document.getElementById('menuBtn');
+            const menuContainer = document.getElementById('menuContainer');
 
-		<!-- Content -->
-			<div id="content">
-
-			{% block contenido  %}
-			{% if messages %}
-				{% for me in messages %}
-					{{ me }}
-				{% endfor %}
-			{% endif %}
-
-            {% endblock %}
-
-			</div>
-
-		<!-- Sidebar -->
-			<div id="sidebar">
-
-				<!-- Logo -->
-					<h1 id="logo"><a href="{% url 'home'%}">TICKETERA</a></h1>
-
-				<!-- Nav -->
-					<nav id="nav">
-						<ul>
-							<!--
-							<li class="current"><a href="#">{{user.username}}</a></li>-->
-							<li><a href="{% url 'registrar_ticket'%}">EMITIR TICKET</a></li>
-							<li><a href="{% url 'listar_tickets' %}">LISTAR TICKETS</a></li>
-							<!--
-							{% if user.is_authenticated %}
-							<li><a href="#">Stock Bodega</a></li>
-							<li><a href="#">Listado Recetas</a></li>
-							{% if perms.app.add_producto %}
-							<li><a href="#">Ingreso Medicamentos</a></li>
-							<li><a href="#">Ingreso Recetas</a></li>
-							{% endif %}
-							
-                            <li><a href="#">Reportes</a></li>
-                            <li><a href="#">Cerrar Sección</a></li>
-							{% else %}
-							<li><a href="#">Login</a></li>
-							{% endif %}
-							-->
-
-						</ul>
-					</nav>
-
-				<!-- Copyright -->
-					<ul id="copyright">
-						<li>&copy; TICKETERA.</li><li>Design: JOSE CORNEJO</li>
-					</ul>
-
-			</div>
-
-		<!-- Scripts -->
-			<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-			{% if messages %}
-				{% for me in messages %}
-					<script>
-						Swal.fire({
-							"title": "Felicitaciones",
-							"text": "{{me}}",
-							"icon": "success"
-						})
-					</script>
-				{% endfor %}
-			{% endif %}
-			
-            {% block js %}
-            <script src="{% static 'app/js/jquery.min.js'%}"></script>
-			<script src="{% static 'app/js/browser.min.js'%}"></script>
-			<script src="{% static 'app/js/breakpoints.min.js'%}"></script>
-			<script src="{% static 'app/js/util.js'%}"></script>
-            <script src="{% static 'app/js/main.js' %}"></script>
-            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-            {% endblock %}
-
-	</body>
+            menuBtn.addEventListener('click', () => {
+                menuContainer.classList.toggle('show');
+            });
+        });
+    </script>
+    <script src="{% static 'app/js/jquery.min.js'%}"></script>
+    <script src="{% static 'app/js/browser.min.js'%}"></script>
+    <script src="{% static 'app/js/breakpoints.min.js'%}"></script>
+    <script src="{% static 'app/js/util.js'%}"></script>
+    <script src="{% static 'app/js/main.js' %}"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    {% block js %}
+    <script>
+        // Aquí puedes agregar tus scripts personalizados si los tienes.
+    </script>
+    {% endblock %}
+</body>
 </html>
